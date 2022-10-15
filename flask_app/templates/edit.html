@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dealz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <a href="/dashboard"><button>Dashboard</button></a>
+    <a href="/logout"><button>Logout</button></a>
+    <form action="/update/{{ car.id }}" method="post">
+        <h1>Edit {{ car.model }}</h1>
+        {% with messages = get_flashed_messages(category_filter = ["new"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <label for="price">Price: </label>
+        <input type="text" id="price" name="price" value="{{ car.price }}">
+        <label for="model">Model: </label>
+        <input type="text" id="model" name="model" value="{{ car.model }}">
+        <label for="make">Make: </label>
+        <input type="text" id="make" name="make" value="{{ car.make }}">
+        <label for="year">Year: </label>
+        <input type="number" id="year" name="year" value="{{ car.year }}">
+        <label for="description">Description: </label>
+        <textarea name="description" id="description" cols="30" rows="10">{{ car.description }}</textarea>
+        <button>Update</button>
+    </form>
+</body>
+</html>
